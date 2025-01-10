@@ -45,7 +45,15 @@ public class SysModelController extends BaseController{
         model.setCreateBy(getUsername());
         return success(modelServeice.insertModel(model));
     }
-
+    /**
+     * 修改模型
+     */
+    @PostMapping("/update")
+    public AjaxResult update(@RequestBody SysModel model)
+    {
+        model.setUpdateBy(getUsername());
+        return success(modelServeice.updateModel(model));
+    }
 
 
 }

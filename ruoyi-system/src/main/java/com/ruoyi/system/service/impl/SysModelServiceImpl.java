@@ -29,6 +29,9 @@ public class SysModelServiceImpl implements ISysModelServeice {
         return modelMapper.selectModelById(id);
     }
 
+    public int updateModel(SysModel model){
+        return modelMapper.updateModel(model);
+    }
     /*
     * 新增模型信息
     * */

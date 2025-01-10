@@ -9,6 +9,8 @@ public interface SysModelMapper {
 
     public Long insertModel(SysModel model);
 
+    public int updateModel(SysModel model);
+
     public SysModel selectModelById(Long id);
 
 }

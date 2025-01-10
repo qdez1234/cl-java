@@ -11,6 +11,7 @@
         <result property="createTime"     column="create_time"    />
         <result property="updateTime"     column="update_time"    />
         <result property="updateBy"       column="update_by"      />
+        <result property="menuId"       column="menu_id"      />
     </resultMap>
 
     <sql id="selectModelVo">
@@ -22,9 +23,21 @@
         <include refid="selectModelVo"/>
     </select>
 
-    <select id="selectModelById" parameterType="Long" resultMap="SysModelResult">
-        <include refid="selectModelVo"></include>
+    <update id="updateModel" parameterType="SysModel">
+        update sys_model
+        <set>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="source !=null and source != ''">source = #{source},</if>
+            update_time = sysdate()
+        </set>
         where id = #{id}
+    </update>
+
+    <select id="selectModelById" parameterType="Long" resultMap="SysModelResult">
+        SELECT m.*, d.menu_id
+        FROM sys_model m
+                 JOIN sys_menu d ON m.id = d.model_id
+        WHERE m.id = #{id};
     </select>
 
     <insert id="insertModel" parameterType="SysModel" useGeneratedKeys="true" keyProperty="id">
